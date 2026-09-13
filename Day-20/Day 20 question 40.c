@@ -3,36 +3,28 @@
 
 int main()
 {
-    long long binary, result = 0;
-    int digit, place = 1;
+    char binary[100];
+    int i;
 
-    // Take a binary number as input
-    scanf("%lld", &binary);
+    // Take binary number as input
+    printf("Enter a binary number: ");
+    scanf("%99s", binary);
 
-    // Process each binary digit
-    while (binary != 0)
+    // Find the 1's complement
+    for (i = 0; binary[i] != '\0'; i++)
     {
-        // Extract the last digit
-        digit = binary % 10;
-
-        // Flip 0 to 1 and 1 to 0
-        if (digit == 0)
-            digit = 1;
-        else
-            digit = 0;
-
-        // Place the complemented digit in its position
-        result = result + digit * place;
-
-        // Move to the next position
-        place = place * 10;
-
-        // Remove the last digit
-        binary = binary / 10;
+        if (binary[i] == '0')
+        {
+            binary[i] = '1';
+        }
+        else if (binary[i] == '1')
+        {
+            binary[i] = '0';
+        }
     }
 
-    // Display the 1's complement
-    printf("%lld", result);
+    // Print the result
+    printf("1's complement = %s\n", binary);
 
-    return 0; // End the program
+    return 0;
 }
