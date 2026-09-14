@@ -1,30 +1,43 @@
 /* Q40: Write a program to find the 1’s complement of a binary number and print it. */
+
 #include <stdio.h>
 
 int main()
 {
-    char binary[100];
-    int i;
+    long long binary, result = 0;
+    long long place = 1;
+    int digit, count = 0;
 
     // Take binary number as input
-    printf("Enter a binary number: ");
-    scanf("%99s", binary);
+    scanf("%lld", &binary);
 
-    // Find the 1's complement
-    for (i = 0; binary[i] != '\0'; i++)
+    // Process each digit
+    while (binary != 0)
     {
-        if (binary[i] == '0')
-        {
-            binary[i] = '1';
-        }
-        else if (binary[i] == '1')
-        {
-            binary[i] = '0';
-        }
+        // Extract the last digit
+        digit = binary % 10;
+
+        // Find the complement
+        if (digit == 0)
+            digit = 1;
+        else
+            digit = 0;
+
+        // Add complemented digit to result
+        result = result + digit * place;
+
+        // Move to next place
+        place = place * 10;
+
+        // Remove the last digit
+        binary = binary / 10;
+
+        // Count number of digits
+        count++;
     }
 
-    // Print the result
-    printf("1's complement = %s\n", binary);
+    // Print result with leading zeros if required
+    printf("%0*lld", count, result);
 
     return 0;
 }
